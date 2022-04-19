@@ -1,0 +1,30 @@
+.form {
+  width: 20rem;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: .2rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  width: 100%;
+}
+
+.header-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 .5rem;
+}
+
+.button {
+  border:0;
+  padding: .5rem 1rem;
+}

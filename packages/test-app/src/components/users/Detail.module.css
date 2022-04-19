@@ -1,0 +1,30 @@
+.detail {
+  background: white;
+  border-right: solid 1px #ccc;
+  height: 100vh;
+  padding: 0rem 1rem;
+  width: 20rem;
+}
+
+.header-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  margin: 0 0 1rem 0;
+  padding: 0 0 0 1rem;
+}
+
+.label {
+  margin:0;
+  padding: 0;
+  margin:0.5rem 0;
+}
+
+.entre {
+  font-size: .85rem;
+  color: #969696;
+  margin:0;
+}

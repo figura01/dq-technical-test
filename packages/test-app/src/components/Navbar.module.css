@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  position: relative;
+  padding-left: 1rem;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 3rem;
+  background: rgb(97, 93, 216);
+  color: white;
+  align-items: center;
+}
+
+.brand {
+  font-size: 1.8rem;
+}

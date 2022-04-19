@@ -1,0 +1,15 @@
+.user-detail {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  width: 20rem;
+  background:  white;
+  height: 100vh;
+}
+
+.header-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+}
