@@ -7,8 +7,6 @@ const Team = require("../models/Team");
 
 // Get All teams
 router.get("/", async (req, res) => {
-  // eslint-disable-next-line no-console
-  console.log("get all Teams")
   try {
     const response = await Team.find().populate("userIds");
     // eslint-disable-next-line no-console
@@ -24,8 +22,6 @@ router.get("/", async (req, res) => {
 
 // Get One teams
 router.get("/:id", async (req, res) => {
-  // eslint-disable-next-line no-console
-  console.log("get One Teams")
   const teamId = req.params.id;
   try {
     const response = await Team.findById(teamId).populate("userIds");
@@ -60,8 +56,8 @@ router.post("/", async (req, res) => {
   try {
     const response = await Team.find({name: team.name});
 
-    if(!response) {
-      res.send("Team name already used, please enter a other name")
+    if(response) {
+      res.status(200).json({errorMsg: "Team name already used, please enter a other name"})
     }
 
     if(response) {
