@@ -6,4 +6,5 @@ const TeamSchema = new Schema({
     userIds: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
-export const teamModel = model("Team", TeamSchema);
+const Team = model("Team", TeamSchema);
+module.exports = Team;

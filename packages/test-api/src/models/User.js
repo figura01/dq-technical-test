@@ -19,7 +19,8 @@ const UserSchema = new Schema({
         type: String,
         enum: Object.values(USER_ROLE_ENUM),
         default: USER_ROLE_ENUM.INTERN,
-    },
+    }
 });
 
-export const userModel = model("User", UserSchema);
+const User = model("User", UserSchema);
+module.exports = User;
