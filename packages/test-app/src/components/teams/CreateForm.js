@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Icon from '@mui/material/Icon';
@@ -28,6 +28,7 @@ const validationSchema = yup.object({
 
 const CreateForm = ({teams, users}) => {
   const navigate = useNavigate()
+  const [errors, setErrors] = useState(null)
   const arrTeamsUsersIds = [];
 
   teams.forEach((t, i) => {
@@ -51,7 +52,11 @@ const CreateForm = ({teams, users}) => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       const response = await service.createOne("/api/teams", values)
-      if(response) navigate("/teams")
+      if(response.errorMsg) {
+        setErrors(response.errorMsg)
+      } else {
+        navigate("/teams")
+      }
     },
   });
 
@@ -76,6 +81,7 @@ const CreateForm = ({teams, users}) => {
           error={formik.touched.name && Boolean(formik.errors.name)}
           helperText={formik.touched.name && formik.errors.name}
           variant="filled"
+          required
           />
       </div>
 
@@ -91,24 +97,29 @@ const CreateForm = ({teams, users}) => {
           error={formik.touched.leader && Boolean(formik.errors.leader)}
           helperText={formik.touched.leader && formik.errors.leader}
           variant="filled"
+          required
         > 
           {arrLeaders.map((l) => (<MenuItem key={`leader_${l._id}`} value={l._id}>{l.firstName} {l.lastName}</MenuItem>))}
         </TextField>
       </div>
-      
+      {console.log(formik.values)}
+      {console.log(formik.errors)}
       <div className={classes["form-group"]}>
         <div className={classes["form-input"]}>
           <Autocomplete
+            required
             multiple
-            id="members"
+            id="members[]"
             options={arrMembers}
             getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
             defaultValue={formik.values.members}
             name="members[]"
             onChange={(event, newValue) => {
+
               formik.setFieldValue("members", newValue);
             }}
-            
+            error={formik.touched.members && Boolean(formik.errors.members)}
+            helperText={formik.touched.members && formik.errors.members}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -118,36 +129,37 @@ const CreateForm = ({teams, users}) => {
                 onChange={ formik.handleChange }
               />
             )}
-          />  
+          /> 
+          
         </div>
       </div>
 
       <div className={classes["form-group"]}>
         <div className={classes["form-input"]}>
-        <Autocomplete
-        multiple
-        id="interns"
-        options={arrInterns}
-        getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
-        defaultValue={formik.values.interns}
-        name="interns[]"
-        onChange={(event, newValue) => {
-          formik.setFieldValue("interns", newValue);
-        }}
-        
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            label="Interns"
-            placeholder=""
-            onChange={ formik.handleChange }
-          />
-        )}
-      />  
+          <Autocomplete
+            multiple
+            id="interns"
+            options={arrInterns}
+            getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
+            defaultValue={formik.values.interns}
+            name="interns[]"
+            onChange={(event, newValue) => {
+              formik.setFieldValue("interns", newValue);
+            }}
+            required
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Interns"
+                placeholder=""
+                onChange={ formik.handleChange }
+              />
+            )}
+          />  
         </div>
       </div>
-      
+      {errors && <p className="danger">* {errors}</p>}
     </form>
 </Fragment>
   );

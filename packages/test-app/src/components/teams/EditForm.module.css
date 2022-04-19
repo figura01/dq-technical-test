@@ -5,6 +5,7 @@
   flex-direction: column;
   background: white;
   border-right: 1px solid #ccc;
+  height: 100vh;
 }
 
 .form-group {

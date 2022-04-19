@@ -29,6 +29,7 @@ const validationSchema = yup.object({
 
 const EditForm = ({teams, users}) => {
   const navigate = useNavigate()
+  const [inputValueMembers, setInputValueMembers] = React.useState([])
   const [loadedTeam, setLoadedTeam] = useState({
     name: "",
     userIds: "",
@@ -37,7 +38,6 @@ const EditForm = ({teams, users}) => {
 
   teams.forEach((t, i) => {
       t.userIds.forEach((uids) => {
-        console.log('uids: ', uids)
         arrTeamsUsersIds.push(uids._id)
       })
   })
@@ -60,6 +60,7 @@ const EditForm = ({teams, users}) => {
     onSubmit: async (values) => {
       console.log('values', values)
       const response = await service.updateOne(`/api/teams/${values._id}`, values)
+      console.log(response)
       if(response) navigate("/teams")
     },
   });
@@ -131,7 +132,7 @@ const EditForm = ({teams, users}) => {
                 options={arrMembers}
                 getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
                 defaultValue={formik.values.members}
-                name="members[]"
+                name="members"
                 onChange={(event, newValue) => {
                   formik.setFieldValue("members", newValue);
                 }}

@@ -33,3 +33,11 @@ a:visited, a:active {
 .container {
     display: flex;
 }
+
+.danger {
+    color: red;
+    background: #ff000030;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
